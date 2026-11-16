@@ -1,0 +1,28 @@
+name: daily-checks
+
+# Once a day: source freshness plus the staging tests that are too expensive to run every 15 minutes.
+# `dbt build --select staging` also recreates the staging view, which resets its 60-day sandbox expiry.
+on:
+  schedule:
+    - cron: "17 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  checks:
+    if: ${{ vars.GCP_WIF_PROVIDER != '' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync --frozen
+      - uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ vars.GCP_WIF_PROVIDER }}
+          service_account: ${{ vars.GCP_SERVICE_ACCOUNT }}
+      - run: uv run dbt source freshness --project-dir dbt --profiles-dir dbt
+      - run: uv run dbt build --select staging --project-dir dbt --profiles-dir dbt

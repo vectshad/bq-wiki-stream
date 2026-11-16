@@ -1,0 +1,34 @@
+name: pipeline
+
+# Every 15 minutes: append new Wikimedia events to raw, then rebuild the marts.
+# Keyless: the job exchanges GitHub's OIDC token for a short-lived Google token (Workload Identity Federation).
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: pipeline
+  cancel-in-progress: false # never cancel a run that is loading data
+
+permissions:
+  contents: read
+  id-token: write # needed to request the OIDC token
+
+jobs:
+  run:
+    # skipped until scripts/setup_wif.sh has created the repository variables
+    if: ${{ vars.GCP_WIF_PROVIDER != '' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync --frozen
+      - uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ vars.GCP_WIF_PROVIDER }}
+          service_account: ${{ vars.GCP_SERVICE_ACCOUNT }}
+      - run: uv run python collector/collect.py
+      # marts only: the staging tests would rescan the 3-day view on every run (see docs/decisions.md D9)
+      - run: uv run dbt build --select marts --project-dir dbt --profiles-dir dbt
