@@ -1,0 +1,32 @@
+version: 2
+
+models:
+  - name: mart_edits_per_hour
+    description: Edits per hour for the last 48 hours, split by editor type. The current hour is partial (is_complete_hour = false).
+    columns:
+      - name: event_hour
+        data_tests: [unique, not_null]
+      - name: edits
+        data_tests: [not_null]
+
+  - name: mart_top_pages_24h
+    description: The 50 most edited articles in the last 24 hours.
+    columns:
+      - name: title
+        data_tests: [unique, not_null]
+
+  - name: mart_edit_sizes_24h
+    description: Edit-size distribution of the last 24 hours by editor type. Sort by bucket_order.
+    columns:
+      - name: size_bucket
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['removed > 1000', 'removed 101-1000', 'removed 1-100', 'no size change', 'added 1-100', 'added 101-1000', 'added > 1000']
+
+  - name: mart_pipeline_health
+    description: One row with the latest event time and recent volume. Read it together with computed_at.
+    columns:
+      - name: latest_event_ts
+        data_tests: [not_null]
