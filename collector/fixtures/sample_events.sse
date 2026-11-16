@@ -1,0 +1,24 @@
+data: {"id": 2650521352, "type": "edit", "namespace": 0, "title": "Q135080729", "wiki": "wikidatawiki", "bot": false, "minor": false, "length": {"old": 63991, "new": 64339}, "meta": {"id": "77f8c0cc-091b-4592-8961-1332f22a29a0", "dt": "2026-11-15T12:28:31.216Z"}, "user": "ExampleEditor"}
+
+data: {"id": 3533348763, "type": "edit", "namespace": 6, "title": "File:Interieur - Zwolle - 20229625 - RCE.jpg", "wiki": "commonswiki", "bot": false, "minor": false, "length": {"old": 3275, "new": 3274}, "meta": {"id": "bb27a10e-c33d-461c-8d7e-74c22bcf2926", "dt": "2026-11-15T12:28:31.279Z"}, "user": "ExampleEditor"}
+
+data: {"id": 177741234, "type": "edit", "namespace": 0, "title": "\u0410\u0431\u043b\u0456\u0446\u043e\u0432", "wiki": "ukwiki", "bot": false, "minor": false, "length": {"old": 727, "new": 769}, "meta": {"id": "88a85c4e-dc9e-40e2-aeaf-a96c504b35c0", "dt": "2026-11-15T12:28:31.280Z"}, "user": "ExampleEditor"}
+
+data: {"id": 2650521353, "type": "edit", "namespace": 0, "title": "Q141261717", "wiki": "wikidatawiki", "bot": false, "minor": false, "length": {"old": 37048, "new": 38591}, "meta": {"id": "0b3224f0-e597-4cff-93f8-4410a7d696d7", "dt": "2026-11-15T12:28:31.361Z"}, "user": "ExampleEditor"}
+
+data: {"id": 150117799, "type": "edit", "namespace": 0, "title": "Place Royale (Nijmegen)", "wiki": "nlwiki", "bot": false, "minor": false, "length": {"old": 3321, "new": 3344}, "meta": {"id": "11a09d94-4bf3-4e1e-9008-89b2b4478c86", "dt": "2026-11-15T12:28:31.376Z"}, "user": "ExampleEditor"}
+
+data: {"id": 2650521354, "type": "edit", "namespace": 0, "title": "Q1248958", "wiki": "wikidatawiki", "bot": false, "minor": false, "length": {"old": 19602, "new": 20649}, "meta": {"id": "d6f4ff28-d1bd-41df-9a3f-e19773401ff4", "dt": "2026-11-15T12:28:31.392Z"}, "user": "ExampleEditor"}
+
+data: {"id": 3533348764, "type": "edit", "namespace": 6, "title": "File:SHENZHEN RIVER(277).jpg", "wiki": "commonswiki", "bot": true, "minor": false, "length": {"old": 6837, "new": 9294}, "meta": {"id": "3478d642-4587-4a7f-80f3-31baa8a8962e", "dt": "2026-11-15T12:28:31.396Z"}, "user": "ExampleEditor"}
+
+data: {"id": 2090613137, "type": "edit", "namespace": 119, "title": "Draft talk:Jeanne Sheehan Zaino", "wiki": "enwiki", "bot": false, "minor": true, "length": {"old": 366, "new": 397}, "meta": {"id": "a1d22f78-68ca-4b22-a2b2-240f76878861", "dt": "2026-11-15T12:28:31.428Z"}, "user": "ExampleEditor"}
+
+data: {"id": 2090613137, "type": "edit", "namespace": 119, "title": "Draft talk:Jeanne Sheehan Zaino", "wiki": "enwiki", "bot": false, "minor": true, "length": {"old": 366, "new": 397}, "meta": {"id": "00000000-0000-0000-0000-00000000000a", "dt": "2026-11-15T12:28:31.428Z"}, "user": "203.0.113.7"}
+
+data: {"id": 2090613137, "type": "edit", "namespace": 119, "title": "Draft talk:Jeanne Sheehan Zaino", "wiki": "enwiki", "bot": false, "minor": true, "length": {"old": 366, "new": 397}, "meta": {"id": "00000000-0000-0000-0000-00000000000b", "dt": "2026-11-15T12:28:31.428Z"}, "user": "~2026-12345-6"}
+
+data: {"id": 3533348766, "type": "categorize", "namespace": 14, "title": "Category:Plantagekerk, Zwolle", "wiki": "commonswiki", "bot": false, "minor": null, "length": null, "meta": {"id": "f02c4b26-184b-4daf-a0ef-5f73f465ddd5", "dt": "2026-11-15T12:28:31.666Z"}, "user": "ExampleEditor"}
+
+data: {"id": 2650521360, "type": "new", "namespace": 0, "title": "Q142173813", "wiki": "wikidatawiki", "bot": true, "minor": false, "length": {"new": 390}, "meta": {"id": "79e99819-d201-40be-ad25-42ed05d94229", "dt": "2026-11-15T12:28:32.039Z"}, "user": "ExampleEditor"}
+
