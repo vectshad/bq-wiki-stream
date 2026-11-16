@@ -4,7 +4,8 @@ name: pipeline
 # Keyless: the job exchanges GitHub's OIDC token for a short-lived Google token (Workload Identity Federation).
 on:
   schedule:
-    - cron: "*/15 * * * *"
+    # off-peak minutes (7, 22, 37, 52): GitHub delays or drops scheduled runs at the top of the hour and the quarter-hours
+    - cron: "7-59/15 * * * *"
   workflow_dispatch:
 
 concurrency:
