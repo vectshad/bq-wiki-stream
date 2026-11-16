@@ -1,6 +1,6 @@
-# Looker Studio dashboard spec
+# Data Studio dashboard spec
 
-Free tier only: standard Looker Studio (https://lookerstudio.google.com). Do not upgrade to Looker Studio Pro.
+Data Studio was called Looker Studio until April 2026. Free tier only: standard Data Studio (https://lookerstudio.google.com). Do not upgrade to Data Studio Pro.
 Build time: about 20 minutes. Do this after the scheduled pipeline has run a few times, so the charts have data.
 
 ## Data sources (Create > Data source > BigQuery > bq-stream-514812 > marts)

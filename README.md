@@ -2,10 +2,10 @@
 
 An end-to-end pipeline on the **free BigQuery sandbox** (no billing account): English Wikipedia edits
 are collected from the Wikimedia live stream, landed in BigQuery every 15 minutes, modelled with dbt
-and shown in a Looker Studio dashboard.
+and shown in a Data Studio dashboard.
 
 ```
-Wikimedia SSE ──► collector (load job / 15 min) ──► raw ──► staging (view) ──► marts ──► Looker Studio
+Wikimedia SSE ──► collector (load job / 15 min) ──► raw ──► staging (view) ──► marts ──► Data Studio
 ```
 
 **Why micro-batch and not streaming:** the sandbox does not support streaming inserts or DML.
@@ -18,7 +18,7 @@ See [docs/decisions.md](docs/decisions.md) for the measurements and trade-offs.
 | Repo and dbt scaffold | done |
 | Collector (`collector/collect.py`, 9 tests, first load and checkpoint cycle verified) | done |
 | dbt models and tests (staging view + 4 marts, 23 tests, source freshness) | done |
-| Looker Studio dashboard | planned |
+| Data Studio dashboard | planned |
 | Scheduled run on GitHub Actions (keyless, Workload Identity Federation) | running every 15 minutes (first run verified 2026-11-16) |
 
 ## Setup

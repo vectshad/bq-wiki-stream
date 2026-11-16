@@ -2,7 +2,7 @@
 
 GCP project `bq-stream-514812` (BigQuery sandbox, **no billing**), location `US`.
 Source: Wikimedia `recentchange` SSE stream, filtered to enwiki edit + new-page events.
-Flow: collector (load job every 15 min) -> `raw` -> `staging` (view) -> `marts` (tables) -> Looker Studio.
+Flow: collector (load job every 15 min) -> `raw` -> `staging` (view) -> `marts` (tables) -> Data Studio.
 Read `docs/decisions.md` before changing the filter, budget or materializations.
 
 ## Commands
