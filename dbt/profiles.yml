@@ -1,0 +1,13 @@
+# No secrets: oauth uses Application Default Credentials (gcloud auth application-default login).
+wiki_stream:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: oauth
+      project: "{{ env_var('GCP_PROJECT', 'bq-stream-514812') }}"
+      dataset: staging # default schema; marts override it in dbt_project.yml
+      location: US
+      threads: 4
+      priority: interactive
+      maximum_bytes_billed: 1000000000 # 1 GB hard cap per query

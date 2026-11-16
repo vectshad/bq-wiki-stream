@@ -1,0 +1,18 @@
+name: wiki_stream
+version: "1.0.0"
+profile: wiki_stream
+
+model-paths: ["models"]
+test-paths: ["tests"]
+macro-paths: ["macros"]
+clean-targets: ["target", "dbt_packages"]
+
+# No incremental models or snapshots: the sandbox does not support DML (see docs/decisions.md S1).
+models:
+  wiki_stream:
+    staging:
+      +schema: staging
+      +materialized: view # views cost no storage; the sandbox storage budget is a lifetime limit
+    marts:
+      +schema: marts
+      +materialized: table
