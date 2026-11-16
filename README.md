@@ -19,7 +19,7 @@ See [docs/decisions.md](docs/decisions.md) for the measurements and trade-offs.
 | Collector (`collector/collect.py`, 9 tests, first load and checkpoint cycle verified) | done |
 | dbt models and tests (staging view + 4 marts, 23 tests, source freshness) | done |
 | Looker Studio dashboard | planned |
-| Scheduled run on GitHub Actions (keyless, Workload Identity Federation) | workflows written, cloud setup pending |
+| Scheduled run on GitHub Actions (keyless, Workload Identity Federation) | running every 15 minutes (first run verified 2026-11-16) |
 
 ## Setup
 
