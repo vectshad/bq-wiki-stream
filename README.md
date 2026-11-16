@@ -16,7 +16,7 @@ See [docs/decisions.md](docs/decisions.md) for the measurements and trade-offs.
 |---|---|
 | Feasibility (load + append in sandbox, stream volume) | done |
 | Repo and dbt scaffold | done |
-| Collector | next |
+| Collector (`collector/collect.py`, 9 tests, dry-run verified on the live stream) | done, first load pending |
 | dbt models and tests | planned |
 | Looker Studio dashboard | planned |
 | Scheduled run on GitHub Actions (keyless, Workload Identity Federation) | planned |

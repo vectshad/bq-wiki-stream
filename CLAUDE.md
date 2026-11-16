@@ -16,6 +16,7 @@ Read `docs/decisions.md` before changing the filter, budget or materializations.
 - Auth is ADC. Never create or commit service account keys or `.env`.
 - Ask before: linking billing, enabling APIs, creating/deleting projects, deleting data.
 - Keep every dataset in `US`. Keep commits small.
+- Commit messages are plain and describe the change only: no mention of AI or tools, no Co-Authored-By trailers.
 
 ## Gotchas
 - Sandbox: no streaming inserts, **no DML** (no dbt incremental or snapshots), tables expire after 60 days, storage is a 10 GiB **lifetime** budget (deleting does not refund it).

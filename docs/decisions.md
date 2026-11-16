@@ -53,8 +53,9 @@ and relies on staging to dedupe by event id. Same lesson as the replayed events 
 A full event is ~1.5 KB; at 109k rows/day that is ~160 MB/day. Raw is therefore a typed subset, NOT an untouched copy.
 
 ### D5. Privacy
-The `user` field holds IP addresses for anonymous edits. It is not stored in the clear
-(drop or hash in the collector); the marts show aggregates only.
+The `user` field holds IP addresses for anonymous edits, which are personal data. The user name is not
+stored at all; raw keeps only `is_anon` (IP address or temporary account) so marts can still show
+anonymous vs registered editing. The collector test checks that no user name reaches a row.
 
 ### D6. Staging is a view, marts are tables rebuilt every 15 minutes over a 48-hour window
 Views cost no storage. Without DML there are no incremental models, so marts are rebuilt in full,
@@ -63,6 +64,13 @@ Time partitioning is safe here (unlike the old project) because the data is rece
 
 ### D7. Storage guard
 The collector stops loading when `raw` exceeds 3 GiB.
+
+### D8. How the collector knows it has caught up (found by testing the replay)
+A `since=` replay is not a clean ordered feed: it opens with a few out-of-order events (stale ones and
+heartbeats with no wiki or type), and this PC's clock was ~40 s off the event times. So the collector
+(a) takes "now" from the server's `Date` header, and (b) stops only after 25 consecutive events at or
+after "now - 5 s". A first version that stopped at the first recent event read 0 rows.
+A 5-minute replay of enwiki edit + new returned 583 rows (1.8/s, Monday morning UTC) vs 1.26/s measured on a Sunday.
 
 ## Cost estimate (to be re-measured after the first real load)
 
