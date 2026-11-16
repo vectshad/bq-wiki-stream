@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: stg_wiki_edits
+    description: >
+      One row per edit / new-page event of the last few days (see var lookback_days), deduplicated by event_id.
+      A view, so it costs no storage.
+    columns:
+      - name: event_id
+        data_tests: [unique, not_null]
+      - name: event_ts
+        description: When the event was published on the Wikimedia stream (UTC).
+        data_tests: [not_null]
+      - name: type
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [edit, new]
+      - name: title
+        data_tests: [not_null]
+      - name: editor_type
+        description: bot (flagged bot), anonymous (IP or temporary account) or registered. Bot takes precedence.
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [bot, anonymous, registered]
+      - name: byte_diff
+        description: Bytes added (positive) or removed (negative) by the edit.
+        data_tests: [not_null]

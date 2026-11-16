@@ -1,0 +1,17 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: raw
+    tables:
+      - name: wiki_edits
+        description: >
+          enwiki edit and new-page events appended by collector/collect.py every 15 minutes.
+          At-least-once: the collector re-reads a 2-minute overlap, so event_id repeats here.
+        config:
+          loaded_at_field: event_ts
+          freshness:
+            warn_after: {count: 45, period: minute}
+            error_after: {count: 3, period: hour}
+            # prune to recent partitions so the freshness query scans a few MB, not the whole table
+            filter: "date(event_ts) >= date_sub(current_date(), interval 2 day)"
