@@ -72,6 +72,13 @@ heartbeats with no wiki or type), and this PC's clock was ~40 s off the event ti
 after "now - 5 s". A first version that stopped at the first recent event read 0 rows.
 A 5-minute replay of enwiki edit + new returned 583 rows (1.8/s, Monday morning UTC) vs 1.26/s measured on a Sunday.
 
+### First real load (2026-11-16, Monday ~08:30 UTC)
+- 60-minute bootstrap: 7,896 rows in one load job, every event id distinct, every 10-minute bucket filled.
+- Real row size is **125 B** (estimate was ~150). Volume was 2.2 events/s, i.e. ~24 MB/day.
+- Bot share was **44%** this hour vs ~7% in the Sunday sample: do not hard-code a bot share anywhere.
+- Second run resumed at `MAX(event_ts) - 2 min`, loaded 624 rows, 274 of them duplicates of the overlap
+  (276 events lie in the overlap). After dedupe: 8,246 distinct events, largest gap between events 5 s.
+
 ## Cost estimate (to be re-measured after the first real load)
 
 - Storage: ~16-50 MB/day -> 1-3 GB per 60 days of the 10 GiB lifetime budget.
