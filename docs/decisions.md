@@ -72,6 +72,21 @@ heartbeats with no wiki or type), and this PC's clock was ~40 s off the event ti
 after "now - 5 s". A first version that stopped at the first recent event read 0 rows.
 A 5-minute replay of enwiki edit + new returned 583 rows (1.8/s, Monday morning UTC) vs 1.26/s measured on a Sunday.
 
+### D9. Scheduled run: GitHub Actions with Workload Identity Federation
+- `pipeline.yml` runs every 15 minutes: collector, then `dbt build --select marts`. `daily-checks.yml` runs
+  source freshness and the staging tests once a day.
+- **Keyless.** GitHub's OIDC token is exchanged for a short-lived Google token; no service account key exists.
+  The provider only trusts `vectshad/bq-wiki-stream` on `refs/heads/main`, so a fork or another branch cannot
+  get a token. The service account has `bigquery.jobUser` and `bigquery.dataEditor` on this sandbox project only.
+  Setup and teardown are scripts (`scripts/setup_wif.sh`, `teardown_wif.sh`); the two repository variables it sets are identifiers, not secrets.
+- **The staging tests are not in the 15-minute run.** Staging is a view over a 3-day window; each of its 9 tests
+  would rescan it. Marts-only builds scan roughly 4 x 30 MB at steady state (about 350 GB/month, ~34% of the free
+  1 TiB). Measure the real figure from `INFORMATION_SCHEMA.JOBS_BY_PROJECT` after a few days and adjust the cadence.
+- Jobs are skipped (not failed) until the repository variables exist.
+- Public repository: scheduled workflows are disabled after 60 days without repository activity.
+- **Sandbox expiry:** tables and views expire 60 days after creation. Marts are recreated every run and the staging
+  view daily, so they renew themselves. `raw.wiki_edits` does not: it needs its expiry pushed forward (not yet done or verified).
+
 ### First real load (2026-11-16, Monday ~08:30 UTC)
 - 60-minute bootstrap: 7,896 rows in one load job, every event id distinct, every 10-minute bucket filled.
 - Real row size is **125 B** (estimate was ~150). Volume was 2.2 events/s, i.e. ~24 MB/day.
