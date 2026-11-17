@@ -19,7 +19,7 @@ See [docs/decisions.md](docs/decisions.md) for the measurements and trade-offs.
 | Collector (`collector/collect.py`, 9 tests, first load and checkpoint cycle verified) | done |
 | dbt models and tests (staging view + 4 marts, 23 tests, source freshness) | done |
 | Data Studio dashboard | planned |
-| Scheduled run on GitHub Actions (keyless, Workload Identity Federation) | running every 15 minutes (first run verified 2026-11-16) |
+| Scheduled run on GitHub Actions (keyless, Workload Identity Federation) | scheduled every 15 minutes; GitHub throttles scheduled runs, so freshness varies from minutes to hours (no data gaps, see decisions D9) |
 
 ## Setup
 

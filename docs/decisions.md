@@ -84,8 +84,13 @@ A 5-minute replay of enwiki edit + new returned 583 rows (1.8/s, Monday morning 
   1 TiB). Measure the real figure from `INFORMATION_SCHEMA.JOBS_BY_PROJECT` after a few days and adjust the cadence.
 - Jobs are skipped (not failed) until the repository variables exist.
 - Public repository: scheduled workflows are disabled after 60 days without repository activity.
-- **Sandbox expiry:** tables and views expire 60 days after creation. Marts are recreated every run and the staging
-  view daily, so they renew themselves. `raw.wiki_edits` does not: it needs its expiry pushed forward (not yet done or verified).
+- **Sandbox expiry (verified 2026-11-17):** views and non-partitioned tables expire 60 days after creation. Marts are
+  recreated every run and the staging view daily, so they renew themselves. `raw.wiki_edits` is day-partitioned and has
+  NO table-level expiry: only each partition expires, 60 days after its date, so history is a rolling 60-day window.
+- **GitHub schedule reliability (measured 2026-11-16/17):** in 19 hours only 2 scheduled runs started (expected ~76),
+  6.7 hours apart. GitHub delays or drops scheduled runs under load and does so more for low-activity repos. Data
+  completeness is not affected (the collector replays from the last loaded event: 0 gaps over 60 s in 184k events), but
+  freshness is: the dashboard can be hours behind. Manual `workflow_dispatch` runs always start immediately.
 
 ### First real load (2026-11-16, Monday ~08:30 UTC)
 - 60-minute bootstrap: 7,896 rows in one load job, every event id distinct, every 10-minute bucket filled.
